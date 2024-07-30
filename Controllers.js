@@ -76,7 +76,11 @@ class Controller {
   async delete(req, res) {
     await db("users").whereNot({ winner_place: 0 }).update({ winner_place: 0 });
     await db("users").whereNot({ is_show: 1 }).update({ is_show: 1 });
-    res.status(200).json("ЙДИНАХ");
+    res.status(200).json("Очищено🗑️");
+  }
+  async usersDelete(req, res) {
+    await db("users").del();
+    res.status(200).json("Очищено користувачів🗑️");
   }
 }
 
