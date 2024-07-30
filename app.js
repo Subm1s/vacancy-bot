@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const port = 5005;
 const Controller = require("./Controllers");
+const startBot = require("./bot");
 const app = express();
 app.use(
   cors({
@@ -15,6 +16,7 @@ app.use(
     ],
   })
 );
+startBot();
 app.use(express.json());
 function authentication(req, res, next) {
   const authheader = req.headers.authorization;
