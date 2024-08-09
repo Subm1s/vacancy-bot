@@ -13,6 +13,7 @@ app.use(
       "https://bbrdq16w-5173.euw.devtunnels.ms",
       "https://fair.onetouch.com.ua",
       "https://api.fair.onetouch.com.ua",
+      "https://qh1t4gmq-5173.euw.devtunnels.ms",
     ],
   })
 );
