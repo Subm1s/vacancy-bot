@@ -23,7 +23,7 @@ const askTicTok = async (ctx) => {
 
 const finalMessage = async (ctx, id) => {
   await ctx.reply(
-    `Ви успішно зареєстровані! Ваш номер: ${id}\nВаш вибір збережено.\nО 21:00 компанія OneTouch розпочне розіграш. Очікуємо на вас.\nУмови розіграшу:\n- підписатись на [Instagram](https://www.instagram.com/one_touch_vn?igsh=MTdvM2oyMzB5NnIxeg==)\n- підписатись на [TikTok](https://www.tiktok.com/@one.touch.vn?_t=8o5r6mZTWsf&_r=1)\n- підписатись на [Новини компанії](https://t.me/onetouchvn)`,
+    `Ви успішно зареєстровані! Ваш номер: ${id}\nВаш вибір збережено.\nО 21:30 компанія OneTouch розпочне розіграш. Очікуємо на вас.\nУмови розіграшу:\n- підписатись на [Instagram](https://www.instagram.com/one_touch_vn?igsh=MTdvM2oyMzB5NnIxeg==)\n- підписатись на [TikTok](https://www.tiktok.com/@one.touch.vn?_t=8o5r6mZTWsf&_r=1)\n- підписатись на [Новини компанії](https://t.me/onetouchvn)`,
     { parse_mode: "Markdown" }
   );
 };
