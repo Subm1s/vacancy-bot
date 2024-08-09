@@ -51,6 +51,7 @@ app.post("/addWinner", Controller.addWinner);
 app.get("/hideUser/:id", Controller.hideUser);
 app.get("/delete", authentication, Controller.delete);
 app.get("/usersDelete", authentication, Controller.usersDelete);
+app.get("/checkSubscription/:userId", Controller.checkMembers);
 
 // Запуск сервера
 app.listen(port, () => {

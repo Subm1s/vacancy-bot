@@ -1,4 +1,5 @@
 const db = require("knex")(require("./knexfile").development);
+const axios = require("axios");
 
 class Controller {
   constructor() {
@@ -81,6 +82,59 @@ class Controller {
   async usersDelete(req, res) {
     await db("users").del();
     res.status(200).json("Очищено користувачів🗑️");
+  }
+  async checkMembers(req, res) {
+    const userId = req.params.userId;
+
+    try {
+      const isUser = await db("users")
+        .where({ telegram_id: userId, is_show: 1 })
+        .first();
+      if (isUser) {
+        const response = await axios.get(
+          `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/getChatMember`,
+          {
+            params: {
+              chat_id: process.env.TELEGRAM_CHANEL,
+              user_id: userId,
+            },
+          }
+        );
+
+        if (response.data.ok) {
+          const memberStatus = response.data.result.status;
+
+          if (
+            memberStatus === "member" ||
+            memberStatus === "administrator" ||
+            memberStatus === "creator"
+          ) {
+            return res.json({ isSubscribed: true });
+          } else {
+            return res.json({ isSubscribed: false });
+          }
+        } else {
+          return res.json({ isSubscribed: false });
+        }
+      } else {
+        return res.json({ isSubscribed: false });
+      }
+    } catch (err) {
+      // Обробка випадку, коли користувача немає в чаті
+      if (
+        err.response &&
+        err.response.data &&
+        err.response.data.error_code === 400 &&
+        (err.response.data.description.includes("user not found") ||
+          err.response.data.description.includes("USER_ID_INVALID"))
+      ) {
+        return res.json({ isSubscribed: false });
+      }
+
+      // Для інших помилок
+      console.log(err);
+      res.status(400).json({ isSubscribed: false });
+    }
   }
 }
 
