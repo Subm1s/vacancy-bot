@@ -10,10 +10,10 @@ class Controller {
     try {
       const users = await db("users")
         .where({ is_show: true })
-        .select("id", "nickname", "name", "phone", "selected_option");
+        .select("id", "nickname", "name", "phone");
       const winner = await db("users")
         .whereNot({ winner_place: 0 })
-        .select("id", "nickname", "name", "phone", "selected_option")
+        .select("id", "nickname", "name", "phone")
         .orderBy("winner_place", "desc");
       const response = { users, winner };
       res.status(200).json(response);
@@ -32,7 +32,7 @@ class Controller {
       });
       const users = await db("users")
         .where({ is_show: true })
-        .select("id", "nickname", "name", "phone", "selected_option");
+        .select("id", "nickname", "name", "phone");
       const winner = await db("users")
         .whereNot({ winner_place: 0 })
         .select(
@@ -40,7 +40,7 @@ class Controller {
           "nickname",
           "name",
           "phone",
-          "selected_option",
+
           "winner_place"
         )
         .orderBy("winner_place", "desc");
@@ -56,7 +56,7 @@ class Controller {
       await db("users").where({ id: id }).update({ is_show: 0 });
       const users = await db("users")
         .where({ is_show: true })
-        .select("id", "nickname", "name", "phone", "selected_option");
+        .select("id", "nickname", "name", "phone");
       const winner = await db("users")
         .whereNot({ winner_place: 0 })
         .select(
@@ -64,7 +64,7 @@ class Controller {
           "nickname",
           "name",
           "phone",
-          "selected_option",
+
           "winner_place"
         )
         .orderBy("winner_place", "desc");
